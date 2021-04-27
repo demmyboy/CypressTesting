@@ -1,4 +1,6 @@
 /// <reference types="Cypress" />
+
+
 import HomePage from '../examples/pageObject/homePage'
 import ProductPage from '../examples/pageObject/productPage'
 
@@ -28,10 +30,29 @@ describe('Framework Test', function() {
             cy.selectProduct(element)
         })
         productPage.clickCheckoutButton().click()
+        let sum = 0
+        cy.get('tr td:nth-child(4) strong').each(($el, index, $list) => {
+            cy.log($el.text())
+            let numberText = $el.text().split(" ")
+            numberText = numberText[1].trim()
+            sum = Number(sum) + Number(numberText)
+        }).then(function() {
+            cy.log('The sum is ', sum)
+        })
+        cy.get('h3 strong').then(function(element) {
+            const total = element.text()
+            const totalInt = total.split(" ")
+            cy.log('new total is', totalInt[1])
+        })
+
+
         cy.contains('Checkout').click()
         cy.get('#country').type('India')
         cy.get('.suggestions > ul > li > a').click()
-
+        cy.get('#checkbox2').click({ force: true })
+        cy.get('input[type="submit"]').click()
+            // cy.get('.alert').should('have.text', 'Success! Thank you! Your order will be delivered in next few weeks :-).')
+        cy.get('.alert').should('include.text', 'Success! Thank you! Your order will be delivered') // can also use contain.text
 
     })
 })
