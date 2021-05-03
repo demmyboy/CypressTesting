@@ -1,8 +1,8 @@
 /// <reference types="Cypress" />
 
 
-import HomePage from '../examples/pageObject/homePage'
-import ProductPage from '../examples/pageObject/productPage'
+import HomePage from '../../support/pageObject/homePage'
+import ProductPage from '../../support/pageObject/productPage'
 
 const homePage = new HomePage()
 const productPage = new ProductPage()
@@ -15,7 +15,7 @@ describe('Framework Test', function() {
         })
     })
     it('should fill the form and assert them', function() {
-        cy.visit('https://rahulshettyacademy.com/angularpractice')
+        cy.visit(Cypress.env('url'))
         homePage.getEditBox().type(this.data.name)
         homePage.getGender().select(this.data.gender)
         homePage.getTwoWayDataBinding().should('have.value', this.data.name)
@@ -40,9 +40,12 @@ describe('Framework Test', function() {
             cy.log('The sum is ', sum)
         })
         cy.get('h3 strong').then(function(element) {
-            const total = element.text()
-            const totalInt = total.split(" ")
+            let total = element.text()
+            let totalInt = total.split(" ")
+            totalInt = totalInt[1].trim()
+
             cy.log('new total is', totalInt[1])
+            expect(sum).to.equal(Number(totalInt))
         })
 
 
