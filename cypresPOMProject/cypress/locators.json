@@ -1,0 +1,19 @@
+{
+    "homePage": {
+        "customerLoginBtn": "body > div > div > div.ng-scope > div > div.borderM.box.padT20 > div:nth-child(3) > button",
+        "bankMangerLoginBtn": "body > div > div > div.ng-scope > div > div.borderM.box.padT20 > div:nth-child(1) > button"
+    },
+    "addCustomerPage": {
+        "addCustomerBtn": "[ng-class='btnClass1']",
+        "firstName": "input[placeholder='First Name']",
+        "lastName": "input[placeholder='Last Name']",
+        "postCode": "input[placeholder='Post Code']",
+        "addCustomerSubmit": "button[type='submit']"
+    },
+    "openAccountsPage": {
+        "openAccountsBtn": "[ng-class='btnClass2']",
+        "customerDropDown": "#userSelect",
+        "currencyDropDown": "#currency",
+        "processClickBtn": "button[type='submit']"
+    }
+}
